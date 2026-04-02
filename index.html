@@ -157,10 +157,11 @@ async function hentMetrix(){
   }catch(e){skj('m-ldr');visFeil('m-feil','Kunne ikke hente data. Prøv igjen.')}
 }
 
+function rens(s){return (s||'').replace(/&rarr;/g,'→').replace(/&amp;/g,'&').replace(/&nbsp;/g,' ')}
 function byggTabell(c){
-  document.getElementById('m-navn').textContent=c.Name||'Ukjent';
+  document.getElementById('m-navn').textContent=rens(c.Name)||'Ukjent';
   const ant=(c.Results||[]).length;
-  document.getElementById('m-meta').innerHTML=`${c.Date||''} &nbsp;·&nbsp; ${c.CourseName||''} &nbsp;·&nbsp; <strong>${ant} spillere</strong>`;
+  document.getElementById('m-meta').innerHTML=`${c.Date||''} &nbsp;·&nbsp; ${rens(c.CourseName)} &nbsp;·&nbsp; <strong>${ant} spillere</strong>`;
   vis('m-info');
   const tracks=c.Tracks||[];
   const results=[...(c.Results||[])].sort((a,b)=>(a.OrderNumber||99)-(b.OrderNumber||99));
@@ -253,4 +254,3 @@ document.getElementById('m-id').addEventListener('keydown',e=>{if(e.key==='Enter
 </script>
 </body>
 </html>
-
