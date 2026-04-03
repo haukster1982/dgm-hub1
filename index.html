@@ -14,7 +14,7 @@ header{background:var(--surf);border-bottom:3px solid var(--acc);padding:14px 16
 .logo span{color:var(--text)}
 .logo-sub{font-size:11px;color:var(--dim);letter-spacing:2px;text-transform:uppercase}
 .tabs{display:flex;background:var(--surf);border-bottom:1px solid var(--bord);overflow-x:auto}
-.tab{flex:1;min-width:80px;padding:12px 6px;text-align:center;font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:700;color:var(--dim);cursor:pointer;border-bottom:3px solid transparent;white-space:nowrap;text-transform:uppercase}
+.tab{flex:1;min-width:70px;padding:12px 4px;text-align:center;font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:700;color:var(--dim);cursor:pointer;border-bottom:3px solid transparent;white-space:nowrap;text-transform:uppercase}
 .tab.aktiv{color:var(--acc);border-bottom-color:var(--acc)}
 .side{display:none;padding:16px}.side.aktiv{display:block}
 .sokk{background:var(--surf);border-radius:12px;padding:14px;margin-bottom:14px}
@@ -57,8 +57,6 @@ tbody tr:nth-child(even) td.nc{background:#12141c}
 .kort-meta{font-size:12px;color:var(--dim);line-height:1.8}
 .badge{display:inline-block;background:rgba(232,84,26,.15);color:var(--acc);border:1px solid rgba(232,84,26,.3);border-radius:4px;padding:2px 7px;font-size:11px;font-weight:700;margin-right:4px}
 .badge.blu{background:rgba(59,130,246,.12);color:#60a5fa;border-color:rgba(59,130,246,.3)}
-.badge.grn{background:rgba(34,197,94,.12);color:var(--grn);border-color:rgba(34,197,94,.3)}
-.badge.yel{background:rgba(250,204,21,.12);color:var(--yel);border-color:rgba(250,204,21,.3)}
 .ldr{text-align:center;padding:30px 20px;color:var(--dim);font-size:14px;display:none}
 .ldr.vis{display:block}
 .spinner{width:32px;height:32px;border:3px solid var(--bord);border-top-color:var(--acc);border-radius:50%;animation:spin .7s linear infinite;margin:0 auto 12px}
@@ -73,12 +71,10 @@ tbody tr:nth-child(even) td.nc{background:#12141c}
 .fylke-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:4px}
 .chip{background:var(--surf);border:1px solid var(--bord);border-radius:8px;padding:10px 6px;font-size:12px;color:var(--dim);cursor:pointer;font-family:'Barlow Condensed',sans-serif;font-weight:700;text-align:center}
 .chip:active,.chip.aktiv{background:var(--acc);border-color:var(--acc);color:#fff}
-.tilbake{width:100%;margin-bottom:12px;text-align:left;padding:10px 14px;font-size:14px}
-.komp-kort{background:var(--surf);border-radius:10px;padding:12px 14px;border:1px solid var(--bord);margin-bottom:8px;cursor:pointer;text-decoration:none;color:inherit;display:block}
-.komp-kort:active{border-color:var(--acc)}
-.komp-navn{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:15px;margin-bottom:3px}
-.komp-meta{font-size:12px;color:var(--dim)}
-.aktiv-prikk{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--grn);margin-right:5px;animation:puls 1.2s infinite}
+.bane-lenker{margin-top:10px;display:flex;flex-direction:column;gap:6px}
+.bl{color:var(--acc);text-decoration:none;font-size:13px;font-family:'Barlow Condensed',sans-serif;font-weight:700;display:block;padding-top:6px;border-top:1px solid var(--bord)}
+.bl.blu{color:#60a5fa}
+.bl.grn{color:var(--grn)}
 </style>
 </head>
 <body>
@@ -93,7 +89,7 @@ tbody tr:nth-child(even) td.nc{background:#12141c}
   <div class="tab" onclick="byttTab('turn',this)">🏅 Turneringer</div>
 </div>
 
-<!-- METRIX RESULTATER -->
+<!-- RESULTATER -->
 <div id="side-metrix" class="side aktiv">
   <div class="sokk">
     <div class="sokk-tittel">Hent konkurranse</div>
@@ -125,19 +121,19 @@ tbody tr:nth-child(even) td.nc{background:#12141c}
 <div id="side-baner" class="side">
   <div class="sokk">
     <div class="sokk-tittel">Velg fylke</div>
-    <div class="fylke-grid" id="b-fylke-grid">
-      <div class="chip" onclick="hentBaner('Rogaland',this)">Rogaland</div>
-      <div class="chip" onclick="hentBaner('Vestland',this)">Vestland</div>
-      <div class="chip" onclick="hentBaner('Oslo',this)">Oslo</div>
-      <div class="chip" onclick="hentBaner('Trøndelag',this)">Trøndelag</div>
-      <div class="chip" onclick="hentBaner('Agder',this)">Agder</div>
-      <div class="chip" onclick="hentBaner('Innlandet',this)">Innlandet</div>
-      <div class="chip" onclick="hentBaner('Vestfold',this)">Vestfold</div>
-      <div class="chip" onclick="hentBaner('Møre',this)">Møre og R.</div>
-      <div class="chip" onclick="hentBaner('Viken',this)">Viken</div>
-      <div class="chip" onclick="hentBaner('Nordland',this)">Nordland</div>
-      <div class="chip" onclick="hentBaner('Troms',this)">Troms</div>
-      <div class="chip" onclick="hentBaner('Finnmark',this)">Finnmark</div>
+    <div class="fylke-grid" id="b-grid">
+      <div class="chip" onclick="hentBaner('rogaland',this)">Rogaland</div>
+      <div class="chip" onclick="hentBaner('vestland',this)">Vestland</div>
+      <div class="chip" onclick="hentBaner('oslo',this)">Oslo</div>
+      <div class="chip" onclick="hentBaner('trondelag',this)">Trøndelag</div>
+      <div class="chip" onclick="hentBaner('agder',this)">Agder</div>
+      <div class="chip" onclick="hentBaner('innlandet',this)">Innlandet</div>
+      <div class="chip" onclick="hentBaner('vestfold',this)">Vestfold</div>
+      <div class="chip" onclick="hentBaner('more',this)">Møre og R.</div>
+      <div class="chip" onclick="hentBaner('viken',this)">Viken</div>
+      <div class="chip" onclick="hentBaner('nordland',this)">Nordland</div>
+      <div class="chip" onclick="hentBaner('troms',this)">Troms</div>
+      <div class="chip" onclick="hentBaner('finnmark',this)">Finnmark</div>
     </div>
   </div>
   <div class="feil" id="b-feil"></div>
@@ -149,19 +145,19 @@ tbody tr:nth-child(even) td.nc{background:#12141c}
 <div id="side-komp" class="side">
   <div class="sokk">
     <div class="sokk-tittel">Velg fylke</div>
-    <div class="fylke-grid" id="k-fylke-grid">
-      <div class="chip" onclick="hentKomp('Rogaland',this)">Rogaland</div>
-      <div class="chip" onclick="hentKomp('Vestland',this)">Vestland</div>
-      <div class="chip" onclick="hentKomp('Oslo',this)">Oslo</div>
-      <div class="chip" onclick="hentKomp('Trøndelag',this)">Trøndelag</div>
-      <div class="chip" onclick="hentKomp('Agder',this)">Agder</div>
-      <div class="chip" onclick="hentKomp('Innlandet',this)">Innlandet</div>
-      <div class="chip" onclick="hentKomp('Vestfold',this)">Vestfold</div>
-      <div class="chip" onclick="hentKomp('Møre',this)">Møre og R.</div>
-      <div class="chip" onclick="hentKomp('Viken',this)">Viken</div>
-      <div class="chip" onclick="hentKomp('Nordland',this)">Nordland</div>
-      <div class="chip" onclick="hentKomp('Troms',this)">Troms</div>
-      <div class="chip" onclick="hentKomp('Finnmark',this)">Finnmark</div>
+    <div class="fylke-grid" id="k-grid">
+      <div class="chip" onclick="hentKomp('rogaland',this)">Rogaland</div>
+      <div class="chip" onclick="hentKomp('vestland',this)">Vestland</div>
+      <div class="chip" onclick="hentKomp('oslo',this)">Oslo</div>
+      <div class="chip" onclick="hentKomp('trondelag',this)">Trøndelag</div>
+      <div class="chip" onclick="hentKomp('agder',this)">Agder</div>
+      <div class="chip" onclick="hentKomp('innlandet',this)">Innlandet</div>
+      <div class="chip" onclick="hentKomp('vestfold',this)">Vestfold</div>
+      <div class="chip" onclick="hentKomp('more',this)">Møre og R.</div>
+      <div class="chip" onclick="hentKomp('viken',this)">Viken</div>
+      <div class="chip" onclick="hentKomp('nordland',this)">Nordland</div>
+      <div class="chip" onclick="hentKomp('troms',this)">Troms</div>
+      <div class="chip" onclick="hentKomp('finnmark',this)">Finnmark</div>
     </div>
   </div>
   <div class="feil" id="k-feil"></div>
@@ -200,7 +196,23 @@ let liveTimer=null,liveAktiv=false,gjeldId=null;
 function vis(id){document.getElementById(id).classList.add('vis')}
 function skj(id){document.getElementById(id).classList.remove('vis')}
 function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;')}
-function rens(s){return(s||'').replace(/&rarr;/g,'→').replace(/&amp;/g,'&').replace(/&nbsp;/g,' ').replace(/&#\d+;/g,'')}
+function rens(s){return(s||'').replace(/&rarr;/g,'→').replace(/&amp;/g,'&').replace(/&nbsp;/g,' ')}
+
+// Byer per fylke for å søke i Metrix
+const FYLKER={
+  rogaland:['Kopervik','Stavanger','Sandnes','Ålgård','Jørpeland','Egersund','Bryne','Klepp','Sola','Karmøy','Randaberg','Sokndal','Sauda','Haugesund','Bokn','Tysvær','Vindafjord','Hjelmeland'],
+  vestland:['Bergen','Askøy','Os','Voss','Stord','Odda','Florø','Sogndal','Leikanger','Fjell','Lindås','Austevoll','Fitjar','Osterøy','Radøy','Meland','Øygarden'],
+  oslo:['Oslo','Bjerke','Grorud','Stovner','Alna','Østensjø','Nordstrand','Søndre','Nordre'],
+  trondelag:['Trondheim','Stjørdal','Steinkjer','Namsos','Orkanger','Melhus','Malvik','Klæbu','Oppdal','Røros','Levanger','Verdal'],
+  agder:['Kristiansand','Mandal','Farsund','Flekkefjord','Arendal','Grimstad','Lillesand','Vennesla','Søgne','Songdalen','Lyngdal'],
+  innlandet:['Lillehammer','Hamar','Gjøvik','Elverum','Kongsvinger','Røros','Fagernes','Moelv','Brumunddal','Raufoss'],
+  vestfold:['Tønsberg','Sandefjord','Larsen','Horten','Stokke','Andebu','Stokke','Nøtterøy','Tjøme','Holmestrand','Sande','Mjøndalen','Drammen','Kongsberg','Numedal'],
+  more:['Ålesund','Molde','Kristiansund','Volda','Ørsta','Valldal','Stranda','Sunndalsøra','Sykkylven','Ulsteinvik','Ørskog'],
+  viken:['Drøbak','Fredrikstad','Sarpsborg','Halden','Moss','Askim','Ski','Ås','Skotselv','Kongsberg','Hokksund','Mjøndalen','Nesbyen','Ringerike','Hønefoss','Jessheim','Lillestrøm','Lørenskog','Sandvika'],
+  nordland:['Bodø','Narvik','Mo i Rana','Mosjøen','Sandnessjøen','Brønnøysund','Leknes','Svolvær'],
+  troms:['Tromsø','Harstad','Finnsnes','Bardufoss','Lenvik'],
+  finnmark:['Alta','Hammerfest','Vadsø','Vardø','Lakselv','Karasjok']
+};
 
 function byttTab(navn,el){
   document.querySelectorAll('.tab').forEach(t=>t.classList.remove('aktiv'));
@@ -223,7 +235,112 @@ async function apiFetch(url){
       return JSON.parse(raw);
     }catch(e){continue}
   }
-  throw new Error('Kunne ikke hente data');
+  throw new Error('Feil');
+}
+
+async function hentAlleBaner(fylkeId){
+  const byer=FYLKER[fylkeId]||[];
+  const alleIds=new Set();
+  const alleBaner=[];
+  // Søk på hvert bynavn parallelt
+  const resultater=await Promise.all(
+    byer.map(by=>apiFetch('https://discgolfmetrix.com/api.php?content=courses_list&country_code=NO&name='+encodeURIComponent(by)).catch(()=>null))
+  );
+  resultater.forEach(data=>{
+    if(!data) return;
+    const baner=Array.isArray(data)?data:(data.Courses||[]);
+    baner.forEach(b=>{
+      if(!alleIds.has(b.ID)){
+        alleIds.add(b.ID);
+        alleBaner.push(b);
+      }
+    });
+  });
+  return alleBaner.sort((a,b)=>(a.City||'').localeCompare(b.City||''));
+}
+
+// ── BANER ───────────────────────────────────────────────────────────────────
+async function hentBaner(fylkeId, el){
+  document.querySelectorAll('#b-grid .chip').forEach(c=>c.classList.remove('aktiv'));
+  el.classList.add('aktiv');
+  skj('b-feil');
+  document.getElementById('b-res').innerHTML='';
+  vis('b-ldr');
+  try{
+    const baner=await hentAlleBaner(fylkeId);
+    skj('b-ldr');
+    if(!baner.length){
+      document.getElementById('b-res').innerHTML='<div class="tom">Ingen baner funnet</div>';
+      return;
+    }
+    document.getElementById('b-res').innerHTML=`
+      <div style="font-family:'Barlow Condensed',sans-serif;font-size:13px;color:var(--dim);margin-bottom:10px">${baner.length} baner funnet</div>
+      <div class="kort-liste">
+        ${baner.map(b=>`
+          <div class="kort" onclick="visBane('${b.ID}','${esc(rens(b.Fullname||b.Name))}','${esc(b.City||'')}')">
+            <div class="kort-navn">${esc(rens(b.Fullname||b.Name))}</div>
+            <div class="kort-meta">📍 ${esc(b.City||'')}${b.Area?' · '+esc(b.Area):''}</div>
+          </div>
+        `).join('')}
+      </div>`;
+  }catch(e){
+    skj('b-ldr');
+    visFeil('b-feil','Kunne ikke hente baner. Prøv igjen.');
+  }
+}
+
+function visBane(id,navn,by){
+  document.getElementById('b-res').innerHTML=`
+    <button class="btn-sec" onclick="tilbake('b')" style="width:100%;margin-bottom:12px;padding:10px;text-align:left">← Tilbake</button>
+    <div class="kort" style="border-color:var(--acc)">
+      <div class="kort-navn">${esc(navn)}</div>
+      ${by?`<div class="kort-meta">📍 ${esc(by)}</div>`:''}
+      <div class="bane-lenker">
+        <a class="bl" href="https://discgolfmetrix.com/?u=course&ID=${id}" target="_blank" rel="noopener">🏆 Se alle konkurranser på Metrix →</a>
+        <a class="bl blu" href="https://www.discgolfscene.com/courses/Norway" target="_blank" rel="noopener">📅 Turneringer på Discgolfscene →</a>
+        <a class="bl grn" href="https://udisc.com/places/norway" target="_blank" rel="noopener">🗺️ Finn på UDisc →</a>
+      </div>
+    </div>`;
+}
+
+// ── KONKURRANSER ────────────────────────────────────────────────────────────
+async function hentKomp(fylkeId, el){
+  document.querySelectorAll('#k-grid .chip').forEach(c=>c.classList.remove('aktiv'));
+  el.classList.add('aktiv');
+  skj('k-feil');
+  document.getElementById('k-res').innerHTML='';
+  vis('k-ldr');
+  try{
+    const baner=await hentAlleBaner(fylkeId);
+    skj('k-ldr');
+    if(!baner.length){
+      document.getElementById('k-res').innerHTML='<div class="tom">Ingen baner funnet</div>';
+      return;
+    }
+    document.getElementById('k-res').innerHTML=`
+      <div style="font-family:'Barlow Condensed',sans-serif;font-size:13px;color:var(--dim);margin-bottom:10px">
+        ${baner.length} baner – trykk for å se ukesgolfer og konkurranser
+      </div>
+      <div class="kort-liste">
+        ${baner.map(b=>`
+          <a class="kort" href="https://discgolfmetrix.com/?u=course&ID=${b.ID}" target="_blank" rel="noopener">
+            <div class="kort-navn">${esc(rens(b.Fullname||b.Name))}</div>
+            <div class="kort-meta">
+              📍 ${esc(b.City||'')}${b.Area?' · '+esc(b.Area):''}
+              <br><span style="color:var(--acc);font-weight:700">Se ukesgolfer og konkurranser på Metrix →</span>
+            </div>
+          </a>
+        `).join('')}
+      </div>`;
+  }catch(e){
+    skj('k-ldr');
+    visFeil('k-feil','Kunne ikke hente data. Prøv igjen.');
+  }
+}
+
+function tilbake(prefix){
+  const aktiv=document.querySelector('#'+prefix+'-grid .chip.aktiv');
+  if(aktiv) aktiv.click();
 }
 
 // ── METRIX RESULTATER ───────────────────────────────────────────────────────
@@ -295,131 +412,6 @@ function toggleLive(){
   const bar=document.getElementById('live-bar');
   if(liveAktiv){clearInterval(liveTimer);liveTimer=null;liveAktiv=false;btn.textContent='⟳ Live';bar.classList.remove('vis')}
   else{liveAktiv=true;btn.textContent='⏹ Stopp live';bar.classList.add('vis');liveTimer=setInterval(()=>{if(gjeldId)hentMetrix()},30000)}
-}
-
-// ── BANER ───────────────────────────────────────────────────────────────────
-async function hentBaner(fylke, el){
-  document.querySelectorAll('#b-fylke-grid .chip').forEach(c=>c.classList.remove('aktiv'));
-  el.classList.add('aktiv');
-  skj('b-feil');
-  document.getElementById('b-res').innerHTML='';
-  vis('b-ldr');
-  try{
-    const data=await apiFetch('https://discgolfmetrix.com/api.php?content=courses_list&country_code=NO&name='+encodeURIComponent(fylke));
-    skj('b-ldr');
-    let baner=Array.isArray(data)?data:(data.Courses||[]);
-    if(!baner.length){
-      document.getElementById('b-res').innerHTML=`<div class="tom">Ingen baner funnet i ${esc(fylke)}</div>`;
-      return;
-    }
-    baner.sort((a,b)=>(a.City||'').localeCompare(b.City||''));
-    document.getElementById('b-res').innerHTML=`
-      <div style="font-family:'Barlow Condensed',sans-serif;font-size:13px;color:var(--dim);margin-bottom:10px">${baner.length} baner funnet i ${esc(fylke)}</div>
-      <div class="kort-liste">
-        ${baner.map(b=>`
-          <div class="kort" onclick="visBane('${b.ID}','${esc(rens(b.Fullname||b.Name))}','${esc(b.City||'')}')">
-            <div class="kort-navn">${esc(rens(b.Fullname||b.Name))}</div>
-            <div class="kort-meta">📍 ${esc(b.City||'')}${b.Area?' · '+esc(b.Area):''}</div>
-          </div>
-        `).join('')}
-      </div>`;
-  }catch(e){
-    skj('b-ldr');
-    visFeil('b-feil','Kunne ikke hente baner. Prøv igjen.');
-  }
-}
-
-function visBane(id, navn, by){
-  document.getElementById('b-res').innerHTML=`
-    <button class="btn-sec tilbake" onclick="tilbakeBaner()">← Tilbake</button>
-    <div class="kort" style="border-color:var(--acc);margin-bottom:12px">
-      <div class="kort-navn">${esc(navn)}</div>
-      ${by?`<div class="kort-meta">📍 ${esc(by)}</div>`:''}
-      <div style="margin-top:12px;display:flex;flex-direction:column;gap:8px">
-        <a href="https://discgolfmetrix.com/?u=course&ID=${id}" target="_blank" rel="noopener"
-           style="color:var(--acc);text-decoration:none;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:14px">
-          🏆 Se alle konkurranser på Metrix →
-        </a>
-        <a href="https://www.discgolfscene.com/courses/Norway" target="_blank" rel="noopener"
-           style="color:#60a5fa;text-decoration:none;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:14px">
-          📅 Turneringer på Discgolfscene →
-        </a>
-        <a href="https://udisc.com/places/norway" target="_blank" rel="noopener"
-           style="color:var(--grn);text-decoration:none;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:14px">
-          🗺️ Finn på UDisc →
-        </a>
-      </div>
-    </div>`;
-}
-
-function tilbakeBaner(){
-  const aktiv = document.querySelector('#b-fylke-grid .chip.aktiv');
-  if(aktiv) aktiv.click();
-}
-
-// ── KONKURRANSER ────────────────────────────────────────────────────────────
-async function hentKomp(fylke, el){
-  document.querySelectorAll('#k-fylke-grid .chip').forEach(c=>c.classList.remove('aktiv'));
-  el.classList.add('aktiv');
-  skj('k-feil');
-  document.getElementById('k-res').innerHTML='';
-  vis('k-ldr');
-
-  try{
-    // Hent alle baner i fylket
-    const baneData=await apiFetch('https://discgolfmetrix.com/api.php?content=courses_list&country_code=NO&name='+encodeURIComponent(fylke));
-    let baner=Array.isArray(baneData)?baneData:(baneData.Courses||[]);
-
-    if(!baner.length){
-      skj('k-ldr');
-      document.getElementById('k-res').innerHTML=`<div class="tom">Ingen baner funnet i ${esc(fylke)}</div>`;
-      return;
-    }
-
-    // Velg bare "parent" baner (type 1) for å unngå duplikater
-    const foreldre = baner.filter(b=>b.Type==='1'||b.Type===1);
-    const sokBaner = foreldre.length>0 ? foreldre : baner;
-
-    // Hent konkurranser for de første 8 banene parallelt
-    const topp = sokBaner.slice(0,8);
-    document.getElementById('k-ldr').querySelector('div+div')&&null;
-    document.getElementById('k-ldr').innerHTML='<div class="spinner"></div>Henter konkurranser fra '+topp.length+' baner...';
-
-    const alleKomp=[];
-    await Promise.all(topp.map(async b=>{
-      try{
-        const d=await apiFetch('https://discgolfmetrix.com/api.php?content=result&id='+b.ID);
-        if(d&&d.Competition&&d.Competition.SubCompetitions){
-          d.Competition.SubCompetitions.forEach(s=>{
-            alleKomp.push({...s, banNavn:rens(b.Fullname||b.Name), by:b.City||''});
-          });
-        }
-      }catch(e){}
-    }));
-
-    skj('k-ldr');
-
-    // Vis baner med lenke til Metrix-siden for konkurranser
-    const res=document.getElementById('k-res');
-    res.innerHTML=`
-      <div style="font-family:'Barlow Condensed',sans-serif;font-size:13px;color:var(--dim);margin-bottom:10px">
-        Ukesgolfer og konkurranser i ${esc(fylke)}
-      </div>
-      <div class="kort-liste">
-        ${sokBaner.map(b=>`
-          <a class="kort" href="https://discgolfmetrix.com/?u=course&ID=${b.ID}" target="_blank" rel="noopener">
-            <div class="kort-navn">${esc(rens(b.Fullname||b.Name))}</div>
-            <div class="kort-meta">
-              📍 ${esc(b.City||'')}
-              <br><span style="color:var(--acc);font-size:11px;font-weight:700">Se ukesgolfer og konkurranser →</span>
-            </div>
-          </a>
-        `).join('')}
-      </div>`;
-  }catch(e){
-    skj('k-ldr');
-    visFeil('k-feil','Kunne ikke hente data. Prøv igjen.');
-  }
 }
 
 function visFeil(id,msg){const el=document.getElementById(id);el.textContent=msg;el.classList.add('vis')}
